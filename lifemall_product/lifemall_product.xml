@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_product_form" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+
+
+                <xpath expr="//div[@class='oe_title']" position="replace">
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name" string="Product Name"/>
+                        </div>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <label for="categ_id" class="oe_edit_only" />
+                        <h2><field name="categ_id" /></h2>
+                        <div name="options" groups="base.group_user">
+                            <field name="sale_ok" invisible="1"/>
+                            <label for="sale_ok" invisible="1"/>
+                            <field name="purchase_ok" invisible="1"/>
+                            <label for="purchase_ok" invisible="1"/>
+                        </div>
+                    </div>
+                </xpath>
+
+                <xpath expr="//page[@string='Accounting']" position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>                
+
+
+                <xpath expr="//group[@string='Sale Conditions']"  position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+
+                </xpath>
+<!-- Working!!!
+                <xpath expr="//group[@name='inventory']//group[@string='Status']"  position="attributes">
+                    
+                    <attribute name='invisible'>True</attribute> 
+
+                </xpath>
+-->
+
+                <xpath expr="//group[@name='inventory']//group[@string='Status']"  position="attributes">
+    
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+
+                <xpath expr="//group[@name='inventory']//group[@string='Weights']//field[@name='volume']"  position="attributes">
+                    <attribute name='invisible'>True</attribute>
+                </xpath>
+
+                <xpath expr="//group[@name='inventory']//group[@string='Weights']//field[@name='weight']"  position="attributes">
+                    <attribute name='string'>Weight (Magento)</attribute> 
+                </xpath>
+
+                <xpath expr="//group[@name='inventory']//group[@string='Weights']//field[@name='weight_net']"  position="attributes">
+                    <attribute name='invisible'>True</attribute>
+                </xpath>
+
+<!--
+                <xpath expr="//group[@name='inventory']"  position="replace">
+    
+                    <group name="status" string="Status" invisible="1">
+                        <field name="state" invisible="1"/>
+                        <field name="product_manager" invisible="1"/>
+                    </group>
+                    <group name="Weights" string="Weights">
+                        <field digits="(14, 3)" name="volume" attrs="{'readonly':[('type','=','service')]}" invisible="1" />
+                        <field name="weight" string="Weight" attrs="{'readonly':[('type','=','service')]}"/>
+                        <field name="weight_net" attrs="{'readonly':[('type','=','service')]}" invisible="1" />
+                    </group>
+                </xpath>
+-->
+
+                <xpath expr="//separator[@string='Description for Suppliers']"  position="attributes">
+    
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+
+                <xpath expr="//field[@name='description_purchase']"  position="attributes">
+    
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+
+        <record id="view_product_supplier_inherit" model="ir.ui.view">
+            <field name="name">product.normal.supplier.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="purchase.view_product_supplier_inherit"/>
+            <field name="arch" type="xml">
+                
+
+                <xpath expr="//separator[@string='Suppliers']"  position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+
+                <xpath expr="//field[@name='seller_ids']"  position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>        
+            </field>
+        </record>
+
+
+
+<!--
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.product.form</field>
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Suppliers']" position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+            </field>
+        </record>       
+
+-->         
+<!--
+        <record id="product_supplierinfo_tree_view" model="ir.ui.view">
+            <field name="name">product.supplierinfo.tree.view</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree[@string='Supplier Information']"  position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+
+                </xpath>
+            </field>
+        </record>
+-->
+
+<!--
+        <record model="ir.ui.view" id="product_form_view_procurement_button">
+            <field name="name">product.product.procurement</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@string='Orderpoints']" position="attributes">
+                     
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+
+            </field>
+        </record>
+-->
+
+
+        <record id="view_normal_procurement_locations_form" model="ir.ui.view">
+            <field name="name">product.normal.procurement.locations.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.view_normal_procurement_locations_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@string='Storage Location']"  position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+
+                </xpath>
+
+
+
+                <xpath expr="//group[@string='Delays']"  position="attributes">
+                    
+                    <attribute name='invisible'>True</attribute> 
+
+                </xpath>
+
+
+                <xpath expr="//group[@string='Counter-Part Locations Properties']"  position="attributes">
+                    
+                    <attribute name='invisible'>True</attribute> 
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+
+
+        <record model="ir.ui.view" id="product_form_view_procurement_button">
+            <field name="name">product.product.procurement</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@string='Request Procurement']" position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+                <xpath expr="//button[@string='Orderpoints']" position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+
+            </field>
+        </record>
+            
+
+<!--
+        <record model="ir.actions.act_window" id="act_confirm_product">
+            <field name="name">Product Confirm</field>
+            <field name="res_model">lifemall.product.product</field>
+            <field name="src_model">product.product</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+-->
+
+        <record model="ir.ui.view" id="product_form_view_confirmation_button">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='buttons']" position="inside">
+                    <button name="confirmed"
+                            type="object"
+                            class="oe_highlight"
+                            string="Confirm Product"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+    </data>
+</openerp>

@@ -1,0 +1,1 @@
+import lifemall_product
