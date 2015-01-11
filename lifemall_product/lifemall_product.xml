@@ -207,15 +207,7 @@
         </record>
             
 
-<!--
-        <record model="ir.actions.act_window" id="act_confirm_product">
-            <field name="name">Product Confirm</field>
-            <field name="res_model">lifemall.product.product</field>
-            <field name="src_model">product.product</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
--->
+
 
         <record model="ir.ui.view" id="product_form_view_confirmation_button">
             <field name="name">product.product.form</field>
