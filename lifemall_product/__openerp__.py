@@ -34,6 +34,7 @@ ZuoQin, zuoqinr@163.com
 """,
  'depends': ['sale',
              'purchase',
+             'procurement'
              ],
  'data': ['lifemall_product.xml',
           ],

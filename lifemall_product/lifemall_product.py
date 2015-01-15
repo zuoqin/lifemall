@@ -231,6 +231,18 @@ class product_product(orm.Model):
     _inherit = 'product.product'
     _logger.info('ZZZZZZZZZZZ   product_product - Lifemall')
 
+
+
+    def onchange_category(self, cr, uid, ids, categ_id, context=None):
+        if categ_id:
+            categ_obj_pool = self.pool.get('product.category')
+            category = categ_obj_pool.browse(cr, uid, categ_id, context=context)
+
+            _logger.info('product category: %s.', category.complete_name)
+            return categ_id
+        _logger.info('product category is empty')
+        return categ_id
+    
     def confirmed(self, cr, uid, ids, context=None):
         """ Creates confirmation for selected product.
         @param self: The object pointer.
