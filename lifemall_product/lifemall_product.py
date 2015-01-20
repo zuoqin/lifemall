@@ -164,20 +164,9 @@ class sale_order(osv.osv):
 
 
 
-
-
-
-
-
-
-
-
-
-
 class product_product(orm.Model):
     _inherit = 'product.product'
     _logger.info('ZZZZZZZZZZZ   product_product - Lifemall')
-
 
 
     _columns = {

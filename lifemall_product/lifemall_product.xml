@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-<!--
-        <record model="ir.ui.view" id="product_form_view_procurement_button">
-            <field name="name">product.product.procurement</field>
+        <record id="product_normal_form_view" model="ir.ui.view">
+            <field name="name">product.normal.form.inherit</field>
             <field name="model">product.product</field>
-            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="account.product_normal_form_view"/>
             <field name="arch" type="xml">
-
-
-                <xpath expr="//div[@name='buttons']" position="attributes">
-                     
+                <xpath expr="//page[@string='Accounting']" position="attributes">
                     <attribute name='invisible'>True</attribute> 
-                </xpath>
-                <xpath expr="//div[@name='buttons']" position="attributes">
-                     
-                    <attribute name='invisible'>True</attribute> 
-                </xpath>
+                </xpath>                
 
             </field>
         </record>
 
--->
-        <record id="view_product_form" model="ir.ui.view">
-            <field name="name">product.product.form</field>
+
+        <record id="lifemall_product_form" model="ir.ui.view">
+            <field name="name">product.normal.form</field>
             <field name="model">product.product</field>
             <field name="type">form</field>
             <field name="inherit_id" ref="product.product_normal_form_view"/>
@@ -61,6 +54,12 @@
                     <attribute name='invisible'>True</attribute> 
                 </xpath> 
 
+                <xpath expr="//field[@name='sale_ok']"  position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>        
+                <xpath expr="//label[@for='sale_ok']"  position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath> 
 
                 <xpath expr="//page[@string='Accounting']" position="attributes">
                     <attribute name='invisible'>True</attribute> 
@@ -169,10 +168,10 @@
         
 
         <record id="product_template_form_view" model="ir.ui.view">
-            <field name="name">product.template.product.form</field>
+            <field name="name">product.template.purchase.ok.form.inherit</field>
             <field name="model">product.template</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="inherit_id" ref="purchase.view_template_purchase_ok_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='sale_ok']" position="attributes">
                     <attribute name='invisible'>True</attribute> 
@@ -181,7 +180,17 @@
         </record>
 
 
-
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.product.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Accounting']" position="attributes">
+                    <attribute name='invisible'>True</attribute> 
+                </xpath>
+            </field>
+        </record>
 
         <record id="view_normal_procurement_locations_form" model="ir.ui.view">
             <field name="name">product.normal.procurement.locations.inherit</field>
@@ -246,6 +255,7 @@
                             class="oe_highlight"
                             string="Confirm Product"/>
                 </xpath>
+                
                 <xpath expr="//field[@name='image_medium']" position="before">
                     <header>
                         <field name="stage" widget="statusbar" statusbar_visible="draft,confirmed" statusbar_colors='{"approved":"red"}'/>
@@ -253,11 +263,11 @@
                     <h1>
                         <separator string="Workflow Actions" colspan="4"   attrs="{'invisible': [('stage', '=', 'confirmed')]}"/>
                         <group colspan="4" col="3">
-                            <button name="product_confirmed" string="Confirm" groups="base.group_user"/>
+                            <button name="product_confirmed" string="Confirm" attrs="{'invisible': [('stage', '=', 'confirmed')]}" groups="base.group_user"/>
                         </group>
                     </h1>
                 </xpath>
-
+                
 
             </field>
         </record>
