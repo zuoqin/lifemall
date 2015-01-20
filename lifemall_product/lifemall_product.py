@@ -8,59 +8,6 @@ from openerp.tools.translate import _
 _logger = logging.getLogger(__name__)
 
 
-class lifemall_product_product(orm.Model):
-    _name = 'lifemall.product.product'
-    _inherit = 'product.product'
-    _description = 'Lifemall Product'
-
-
-    _logger.info('LLLLLLLLLL   lifemall_product')
-
-    #_columns = {
-    #    'purchase_ok': fields.boolean('Can be Purchased'),
-    #}
-
-    #_defaults = {
-    #    'purchase_ok': 1,
-    #}
-    #product_product()
-
-    def confirmed(self, cr, uid, context=None):
-        """ Creates confirmation for selected product.
-        @param self: The object pointer.
-        @param cr: A database cursor
-        @param uid: ID of the user currently logged in
-        @param ids: List of IDs selected
-        @param context: A standard dictionary
-        @return: A dictionary which loads Procurement form view.
-        """
-        _logger.info('ZZZZZZZZZZ  Calling lifemall.product.product confirm_product')
-
-        # magento_obj = self.pool.get('magento.product.product')
-
-        #_logger.info("Printing magento object:")
-        #_logger.info(magento_obj)
-        #str1 = "Product_id = " + str(rec_id)
-        #_logger.info(str1)
-        #_logger.info('ZZZZZZZZZZZ   ids:')
-        #ids = res_original.magento_bind_ids
-        #print(context)
-
-
-        # ids = self.pool.get('magento.product.product').search(cr, uid, [('openerp_id', '=', rec_id)])
-        # for id in ids:
-
-            
-
-        #     #str1 = "Magento_id = " + str(ids)
-        #     str1 = "Magento_id = " + str(id)
-        #     _logger.info(str1)
-        #     magento_obj.recompute_magento_qty(cr, uid, id,
-        #                                           context=context)        
-
-
-
-
 
 
 
@@ -232,6 +179,32 @@ class product_product(orm.Model):
     _logger.info('ZZZZZZZZZZZ   product_product - Lifemall')
 
 
+
+    _columns = {
+        'stage': fields.selection([
+            ('draft', 'Draft Product'),
+            ('confirmed', 'Confirmed Product'),
+            ], 'Stage', readonly=True, #track_visibility='onchange',
+            help="Gives the status of the Product. \n", select=True)
+        }
+    _defaults = {
+        'stage': 'draft',
+        }
+
+    def product_draft(self, cr, uid, ids):
+        _logger.info('product_draft, stage: draft')
+        self.write(cr, uid, ids, {'stage': 'draft'})
+        return True
+
+    def product_confirmed(self, cr, uid, ids):
+        _logger.info('product_confirmed, stage: confirmed')
+        self.write(cr, uid, ids, {'stage': 'confirmed'})
+        return True
+
+    def product_approved(self, cr, uid, ids):
+        _logger.info('product_approved, stage:: approved')
+        self.write(cr, uid, ids, {'stage': 'approved'})
+        return True
 
     def onchange_category(self, cr, uid, ids, categ_id, context=None):
         if categ_id:

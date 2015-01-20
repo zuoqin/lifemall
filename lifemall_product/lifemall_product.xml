@@ -52,6 +52,8 @@
                         </div>
                     </div>
                 </xpath>
+
+
                 <xpath expr="//div[@name='options']//field[@name='purchase_ok']"  position="attributes">
                     <attribute name='invisible'>True</attribute> 
                 </xpath>        
@@ -165,20 +167,19 @@
         </record>       
 
         
-<!--
-        <record id="product_supplierinfo_tree_view" model="ir.ui.view">
-            <field name="name">product.supplierinfo.tree.view</field>
-            <field name="model">product.supplierinfo</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//tree[@string='Supplier Information']"  position="attributes">
-                    <attribute name='invisible'>True</attribute> 
 
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.product.form</field>
+            <field name="model">product.template</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sale_ok']" position="attributes">
+                    <attribute name='invisible'>True</attribute> 
                 </xpath>
             </field>
         </record>
--->
+
 
 
 
@@ -245,6 +246,18 @@
                             class="oe_highlight"
                             string="Confirm Product"/>
                 </xpath>
+                <xpath expr="//field[@name='image_medium']" position="before">
+                    <header>
+                        <field name="stage" widget="statusbar" statusbar_visible="draft,confirmed" statusbar_colors='{"approved":"red"}'/>
+                    </header>
+                    <h1>
+                        <separator string="Workflow Actions" colspan="4"   attrs="{'invisible': [('stage', '=', 'confirmed')]}"/>
+                        <group colspan="4" col="3">
+                            <button name="product_confirmed" string="Confirm" groups="base.group_user"/>
+                        </group>
+                    </h1>
+                </xpath>
+
 
             </field>
         </record>
@@ -259,8 +272,7 @@
                 <xpath expr="//notebook/page[@string='Information']" position="after">
                     <page string="Interior" groups="__export__.res_groups_45">
                         <group col="4" string="Interior Details">
-                            <label for="name" string="Product Name"/>
-                            <field name="name"/>   
+                            <label for="wood_origin" string="Wood origin"/>  
                         </group>                                                                                     
                     </page>                                        
                 </xpath>

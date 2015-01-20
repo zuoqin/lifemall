@@ -37,6 +37,7 @@ ZuoQin, zuoqinr@163.com
              'procurement'
              ],
  'data': ['lifemall_product.xml',
+          'lifemall_workflow.xml',
           ],
  'installable': True,
  'application': True,
